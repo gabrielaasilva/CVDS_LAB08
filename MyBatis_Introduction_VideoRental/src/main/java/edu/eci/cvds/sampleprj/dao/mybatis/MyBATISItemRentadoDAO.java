@@ -8,6 +8,7 @@ import edu.eci.cvds.sampleprj.dao.ItemRentadoDAO;
 import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemRentadoMapper;
 import edu.eci.cvds.samples.entities.ItemRentado;
+import org.junit.experimental.theories.internal.ParameterizedAssertionError;
 
 public class MyBATISItemRentadoDAO implements ItemRentadoDAO {
 
@@ -15,20 +16,28 @@ public class MyBATISItemRentadoDAO implements ItemRentadoDAO {
     private ItemRentadoMapper itemRentadoMapper;
 
     @Override
-    public List<ItemRentado> loadItems() throws PersistenceException {
+    public List<ItemRentado> consultarItemsRentados(long idC) throws PersistenceException {
         try{
-            return itemRentadoMapper.consultarItemsRentados();
+            return itemRentadoMapper.consultarItemsRentados(idC);
         } catch(org.apache.ibatis.exceptions.PersistenceException e){
-            throw new PersistenceException("Error al consultar los itemsRentados",e);
+            throw new PersistenceException("Error al consultar los itemsRentados de el cliente "+idC,e);
         }
     }
 
     @Override
-    public ItemRentado load(int id) throws PersistenceException {
+    public ItemRentado consultarItemRentado(int idI) throws PersistenceException {
         try{
-            return itemRentadoMapper.consultarItemRentado(id);
+            return itemRentadoMapper.consultarItemRentado(idI);
         } catch(org.apache.ibatis.exceptions.PersistenceException e){
-            throw new PersistenceException("Error al consultar el itemRentado "+id,e);
+            throw new PersistenceException("Error al consultar el itemRentado "+idI,e);
+        }
+    }
+
+    public List<ItemRentado> totalItemsRentados() throws PersistenceException {
+        try{
+            return itemRentadoMapper.TotalRentado();
+        }catch(org.apache.ibatis.exceptions.PersistenceException e){
+            throw new PersistenceException("Error al consultar el itemRentado ",e);
         }
     }
 }

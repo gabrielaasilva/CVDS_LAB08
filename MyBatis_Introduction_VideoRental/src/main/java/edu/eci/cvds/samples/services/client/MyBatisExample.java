@@ -27,6 +27,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+
+import edu.eci.cvds.samples.services.ExcepcionServiciosAlquiler;
+import edu.eci.cvds.samples.services.ServiciosAlquilerFactory;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -64,7 +67,7 @@ public class MyBatisExample {
      * @param args
      * @throws SQLException
      */
-    public static void main(String args[]) throws SQLException {
+    public static void main(String args[]) throws SQLException, ExcepcionServiciosAlquiler {
 
         SqlSessionFactory sessionfact = getSqlSessionFactory();
         SqlSession sqlss = sessionfact.openSession();
@@ -90,6 +93,8 @@ public class MyBatisExample {
 
         sqlss.commit();
         sqlss.close();
+
+        //System.out.println(ServiciosAlquilerFactory.getInstance().getServiciosAlquilerTesting().consultarTipoItem(90));
     }
 
     /**
