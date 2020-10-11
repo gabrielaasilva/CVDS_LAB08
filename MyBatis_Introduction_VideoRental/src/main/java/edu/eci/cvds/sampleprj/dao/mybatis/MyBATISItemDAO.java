@@ -46,8 +46,6 @@ public class MyBATISItemDAO implements ItemDAO{
     }catch (org.apache.ibatis.exceptions.PersistenceException e){
       throw new PersistenceException("Error al consultar todos los items",e);
     }
-
-
   }
 
   @Override
@@ -55,15 +53,16 @@ public class MyBATISItemDAO implements ItemDAO{
        try{
             itemMapper.actualizarTarifaItem(id,tarifa);
        }catch (org.apache.ibatis.exceptions.PersistenceException e){
-           throw new PersistenceException("Error al consultar todos los items",e);
+           throw new PersistenceException("Error al actualizar la tarifa del item",e);
        }
-
-
   }
 
   @Override
   public List<Item> consultarItemsDisponibles() throws PersistenceException {
-    return null;
+      try{
+          return itemMapper.consultarItemsDisponibles();
+      }catch (org.apache.ibatis.exceptions.PersistenceException e){
+          throw new PersistenceException("Error al consultar los items disponibles",e);
+      }
   }
-
 }
