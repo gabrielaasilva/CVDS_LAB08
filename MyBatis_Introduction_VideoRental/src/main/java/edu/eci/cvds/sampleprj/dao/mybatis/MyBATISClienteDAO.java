@@ -1,6 +1,6 @@
 package edu.eci.cvds.sampleprj.dao.mybatis;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import com.google.inject.Inject;
@@ -26,9 +26,9 @@ public class MyBATISClienteDAO implements ClienteDAO {
     }
 
     @Override
-    public void saveItemRentadoCliente(long idcli, int idit, Date fechainicio, Date fechafin) throws PersistenceException {
+    public void agregarItemRentado(long idcli, int id, java.sql.Date fechainicio, Date fechafin) throws PersistenceException {
         try {
-            clienteMapper.agregarItemRentadoACliente(idcli, idit, fechainicio, fechafin);
+            clienteMapper.agregarItemRentadoACliente((int) idcli, id, fechainicio, fechafin);
         } catch (org.apache.ibatis.exceptions.PersistenceException e) {
             throw new PersistenceException("Error al añadir el nuevo cliente", e);
         }
@@ -36,7 +36,7 @@ public class MyBATISClienteDAO implements ClienteDAO {
     }
 
     @Override
-    public List<Cliente> loadClientes() throws PersistenceException {
+    public List<Cliente> consultarClientes() throws PersistenceException {
         try {
             return clienteMapper.consultarClientes();
         } catch (Exception e) {
@@ -54,7 +54,7 @@ public class MyBATISClienteDAO implements ClienteDAO {
     }
 
     @Override
-    public void addCliente(Cliente c) throws PersistenceException {
+    public void save(Cliente c) throws PersistenceException {
         try {
             clienteMapper.agregarCliente(c);
         } catch (Exception e) {
@@ -64,7 +64,7 @@ public class MyBATISClienteDAO implements ClienteDAO {
     }
 
     @Override
-    public void vetarCliente(long docu, boolean estado) throws PersistenceException {
+    public void vetar(long docu, boolean estado) throws PersistenceException {
         try {
             clienteMapper.vetar(docu, estado);
         } catch (Exception e) {

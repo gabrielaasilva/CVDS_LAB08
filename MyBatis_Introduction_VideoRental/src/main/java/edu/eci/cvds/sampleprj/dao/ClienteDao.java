@@ -13,9 +13,11 @@ public interface ClienteDAO {
 
     public Cliente load(long id) throws PersistenceException;
 
+    List<ItemRentado> loadItemsCliente(long idCliente) throws PersistenceException;
+
     public void save(Cliente cli) throws PersistenceException;
 
-    public void agregarItemRentado(long docu, int id, Date fechaini, Date fechafin) throws PersistenceException;
+    public void agregarItemRentado(long idcli, int id, Date fechainicio, Date fechafin) throws PersistenceException;
 
     public List<Cliente> consultarClientes() throws PersistenceException;
 
